@@ -1,0 +1,14 @@
+services:
+  latex:
+    build: .
+    image: latex
+    # カレントディレクトリをコンテナ内 /workspace にマウント
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    # ホストのファイル所有権を保つ（Linux ホスト向け。Mac では無害）
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    # 常駐させておき `docker compose exec` でコマンドを流せるようにする
+    tty: true
+    stdin_open: true
+    command: /bin/bash

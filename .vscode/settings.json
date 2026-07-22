@@ -1,0 +1,38 @@
+{
+  // LaTeX Workshop のビルドを Docker(texlive) 経由で行う設定
+  "latex-workshop.latex.tools": [
+    {
+      "name": "docker-latexmk",
+      "command": "./latexmk-docker.sh",
+      "args": ["%DOCFILE%"],
+      "env": {}
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "Docker latexmk",
+      "tools": ["docker-latexmk"]
+    }
+  ],
+  // 既定レシピを Docker 版に
+  "latex-workshop.latex.recipe.default": "Docker latexmk",
+  // 生成物はソースと同じディレクトリへ
+  "latex-workshop.latex.outDir": "%DIR%",
+  // 保存時に自動ビルド
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  // LaTeX Workshop の整形を Docker 内 latexindent で実行
+  "latex-workshop.formatting.latex": "latexindent",
+  "latex-workshop.formatting.latexindent.path": "./latexindent-docker.sh",
+  "latex-workshop.formatting.latexindent.args": [
+    "%TMPFILE%",
+    "-y=defaultIndent: '%INDENT%'"
+  ],
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop",
+    "editor.formatOnSave": true
+  },
+  // 中間ファイルはコンテナ内 latexmk が管理するのでクリーンは latexmk -c に任せる
+  "latex-workshop.latex.clean.method": "command",
+  "latex-workshop.latex.clean.command": "./latexmk-docker.sh",
+  "latex-workshop.latex.clean.args": ["-c", "%DOCFILE%"]
+}

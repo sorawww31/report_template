@@ -1,0 +1,18 @@
+# latexmk の中間ファイルは build/ に出力される
+build/
+
+# PDF はルート直下に出力するが、生成物なので通常は commit しない
+/*.pdf
+
+# 念のため、ルートに残る可能性のある LaTeX 中間ファイル
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.log
+
+# エディタ / OS
+.DS_Store
